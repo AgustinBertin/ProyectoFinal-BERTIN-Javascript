@@ -19,59 +19,47 @@ function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+// Función para eliminar un producto del carrito
+function eliminarProducto(nombreProducto) {
+  carrito = carrito.filter((item) => item.producto.nombre !== nombreProducto);
+  actualizarCarrito();
+  guardarCarrito();
+}
+
+// Función para restar la cantidad de un producto en el carrito
+function restarProducto(nombreProducto, cantidadActual) {
+  if (cantidadActual > 1) {
+    carrito.find((item) => item.producto.nombre === nombreProducto).cantidad--;
+    actualizarCarrito();
+    guardarCarrito();
+  }
+}
+
+// Función para sumar la cantidad de un producto en el carrito
+function sumarProducto(nombreProducto, cantidadActual) {
+  carrito.find((item) => item.producto.nombre === nombreProducto).cantidad++;
+  actualizarCarrito();
+  guardarCarrito();
+}
+
 const actualizarCarrito = () => {
-  carritoContainer.innerHTML = "";
   let total = 0;
+  let carritoHTML = "";
 
   carrito.forEach(({ producto, cantidad }) => {
-    const carritoItem = document.createElement("div");
-    carritoItem.className = "carrito-item";
-
-    const carritoTexto = document.createElement("p");
-    carritoTexto.innerText = `${producto.nombre} x${cantidad}`;
-    carritoItem.appendChild(carritoTexto);
-
-    const btnEliminar = document.createElement("button");
-    btnEliminar.innerText = "Eliminar Producto";
-    btnEliminar.addEventListener("click", () => {
-      carrito = carrito.filter(
-        (item) => item.producto.nombre !== producto.nombre
-      );
-      actualizarCarrito();
-      guardarCarrito();
-    });
-    carritoItem.appendChild(btnEliminar);
-
-    const btnRestar = document.createElement("button");
-    btnRestar.innerText = "-";
-    btnRestar.addEventListener("click", () => {
-      if (cantidad > 1) {
-        carrito.find((item) => item.producto.nombre === producto.nombre)
-          .cantidad--;
-        actualizarCarrito();
-        guardarCarrito();
-      }
-    });
-    carritoItem.appendChild(btnRestar);
-
-    const cantidadProducto = document.createElement("span");
-    cantidadProducto.innerText = cantidad;
-
-    const btnSumar = document.createElement("button");
-    btnSumar.innerText = "+";
-    btnSumar.addEventListener("click", () => {
-      carrito.find((item) => item.producto.nombre === producto.nombre)
-        .cantidad++;
-      actualizarCarrito();
-      guardarCarrito();
-    });
-    carritoItem.appendChild(btnSumar);
-
-    carritoContainer.appendChild(carritoItem);
+    carritoHTML += `
+      <div class="carrito-item mb-2">
+        <p class="mb-0"><strong>${producto.nombre}</strong> x${cantidad}</p>
+        <button class="btn btn-danger btn-sm me-2" onclick="eliminarProducto('${producto.nombre}')">Eliminar Producto</button>
+        <button class="btn btn-primary btn-sm me-2" onclick="restarProducto('${producto.nombre}', ${cantidad})">-</button>
+        <button class="btn btn-primary btn-sm" onclick="sumarProducto('${producto.nombre}', ${cantidad})">+</button>
+      </div>
+    `;
     total += producto.precio * cantidad;
   });
 
-  totalContainer.innerText = `Total: $${total.toFixed(2)}`;
+  carritoContainer.innerHTML = carritoHTML;
+  totalContainer.innerHTML = `<strong>Total:</strong> $${total.toFixed(2)}`;
 };
 
 const agregarProducto = (producto) => {
@@ -150,39 +138,52 @@ const buscarProductosPorNombre = (nombre, tipoSeleccionado) => {
 const mostrarProductos = (productosMostrados) => {
   productosContainer.innerHTML = "";
 
+  const cardContainer = document.createElement("div");
+  cardContainer.className = "row row-cols-2 row-cols-md-4 g-4"; // Agrega clases de Bootstrap para la cuadrícula
+
   productosMostrados.forEach((producto) => {
-    productosContainer.innerHTML += `
-      <div class="producto-container">
-        <h3>${producto.nombre}</h3>
-        <p>$${producto.precio.toFixed(2)}</p>
-        <button class="agregar-button" data-producto="${
-          producto.nombre
-        }">Agregar al carrito</button>
+    const card = document.createElement("div");
+    card.className = "col"; // Agrega clase de Bootstrap para columnas
+
+    card.innerHTML = `
+      <div class="card bg-warning mb-3 h-100"> <!-- Agrega la clase "h-100" para igualar el largo -->
+        <div class="card-body">
+          <h5 class="card-title">${producto.nombre}</h5>
+          <p class="card-text">$${producto.precio.toFixed(2)}</p>
+          <p class="card-text">${
+            producto.descripcion
+          }</p> <!-- Agrega la descripción del producto -->
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary agregar-button" data-producto="${
+            producto.nombre
+          }">Agregar al carrito</button>
+        </div>
       </div>
     `;
-  });
 
-  const agregarButtons = document.querySelectorAll(".agregar-button");
-  agregarButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      const nombreProducto = event.target.getAttribute("data-producto");
-      const productoSeleccionado = productos.find(
-        (producto) => producto.nombre === nombreProducto
-      );
-      agregarProducto(productoSeleccionado);
+    cardContainer.appendChild(card);
+
+    const agregarButtons = card.querySelectorAll(".agregar-button");
+    agregarButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const nombreProducto = event.target.getAttribute("data-producto");
+        const productoSeleccionado = productos.find(
+          (producto) => producto.nombre === nombreProducto
+        );
+        agregarProducto(productoSeleccionado);
+      });
     });
   });
+  productosContainer.appendChild(cardContainer);
 };
 
 // Carga de productos desde el archivo JSON
 fetch("./db/productos.json")
   .then((resp) => resp.json())
   .then((data) => {
-    // Aquí puedes trabajar con los productos obtenidos, por ejemplo, mostrarlos en la página
     console.log(data);
-    // Asigna los productos a la variable 'productos'
     productos = data;
-    // Luego, llama a mostrarProductos para mostrarlos en la página
     mostrarProductos(productos);
   })
   .catch((error) => {

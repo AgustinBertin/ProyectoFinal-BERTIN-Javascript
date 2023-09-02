@@ -2,41 +2,49 @@
   {
     "nombre": "Hamburguesa Clasica",
     "tipo": "hamburguesas",
-    "precio": 2800
+    "precio": 2800,
+    "descripcion": "Nuestra Hamburguesa Clásica contiene: medallon de carne 120grs, lechuga fresca, tomate, cebolla y una irresistible salsa especial"
   },
   {
     "nombre": "Hamburguesa de Pollo",
     "tipo": "hamburguesas",
-    "precio": 2500
+    "precio": 2500,
+    "descripcion": "Disfruta de nuestra Hamburguesa de Pollo, preparada con pechuga de pollo tierna y crujiente, cheddar, lechuga, tomate y una deliciosa mayonesa."
   },
   {
     "nombre": "Hamburguesa Vegetariana",
     "tipo": "hamburguesas",
-    "precio": 2600
+    "precio": 2600,
+    "descripcion": "Nuestra Hamburguesa Vegetariana es una opción saludable y deliciosa hecha con hamburguesas NotCo, cheddar, lechuga fresca, tomate, cebolla, pepinillos y una exquisita salsa."
   },
   {
     "nombre": "Hamburguesa Doble Cheese Bacon",
     "tipo": "hamburguesas",
-    "precio": 3200
+    "precio": 3200,
+    "descripcion": "La Hamburguesa Doble Cheese Bacon es una explosión de sabor con dos medallones de carne 120gr, doble queso cheddar y bacon crujiente."
   },
   {
     "nombre": "Porcion de Papas Fritas",
     "tipo": "porciones",
-    "precio": 800
+    "precio": 800,
+    "descripcion": "Nuestras Papas Fritas son cortadas en tiras finas y crujientes, sazonadas para un sabor inigualable."
   },
   {
     "nombre": "Porcion de Aros de Cebolla",
     "tipo": "porciones",
-    "precio": 800
+    "precio": 800,
+    "descripcion": "Nuestra Porción de Aros de Cebolla son crujientes y sabrosos, perfectos para compartir."
   },
   {
     "nombre": "Porción de Nuggets de Pollo",
     "tipo": "porciones",
-    "precio": 900
+    "precio": 900,
+    "descripcion": "Nuestra Porción de Nuggets de Pollo presenta bocados tiernos y dorados de pechuga de pollo, ideales para disfrutar solos o con tus salsas favoritas."
   },
   {
     "nombre": "Porcion de Bastones de Queso",
     "tipo": "porciones",
-    "precio": 850
+    "precio": 850,
+    "descripcion": "Los Bastones de Queso son irresistibles, con queso fundido y cremoso en un crujiente rebozado."
   }
 ]
