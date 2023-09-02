@@ -139,11 +139,11 @@ const mostrarProductos = (productosMostrados) => {
   productosContainer.innerHTML = "";
 
   const cardContainer = document.createElement("div");
-  cardContainer.className = "row row-cols-2 row-cols-md-4 g-4"; // Agrega clases de Bootstrap para la cuadrícula
+  cardContainer.className = "row row-cols-2 row-cols-md-4 g-4";
 
   productosMostrados.forEach((producto) => {
     const card = document.createElement("div");
-    card.className = "col"; // Agrega clase de Bootstrap para columnas
+    card.className = "col";
 
     card.innerHTML = `
       <div class="card bg-warning mb-3 h-100"> <!-- Agrega la clase "h-100" para igualar el largo -->
