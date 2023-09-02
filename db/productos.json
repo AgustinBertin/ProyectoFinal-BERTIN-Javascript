@@ -1,0 +1,42 @@
+[
+  {
+    "nombre": "Hamburguesa Clasica",
+    "tipo": "hamburguesas",
+    "precio": 2800
+  },
+  {
+    "nombre": "Hamburguesa de Pollo",
+    "tipo": "hamburguesas",
+    "precio": 2500
+  },
+  {
+    "nombre": "Hamburguesa Vegetariana",
+    "tipo": "hamburguesas",
+    "precio": 2600
+  },
+  {
+    "nombre": "Hamburguesa Doble Cheese Bacon",
+    "tipo": "hamburguesas",
+    "precio": 3200
+  },
+  {
+    "nombre": "Porcion de Papas Fritas",
+    "tipo": "porciones",
+    "precio": 800
+  },
+  {
+    "nombre": "Porcion de Aros de Cebolla",
+    "tipo": "porciones",
+    "precio": 800
+  },
+  {
+    "nombre": "Porción de Nuggets de Pollo",
+    "tipo": "porciones",
+    "precio": 900
+  },
+  {
+    "nombre": "Porcion de Bastones de Queso",
+    "tipo": "porciones",
+    "precio": 850
+  }
+]
